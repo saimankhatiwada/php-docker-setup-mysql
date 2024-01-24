@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+
+  practice-server:
+    container_name: practice.Server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - practice-db
+    ports:
+      - 5173:80
+
+  practice-db:
+    image: mysql:latest
+    container_name: practice.Db
+    environment:
+      - MYSQL_DATABASE=practice
+      - MYSQL_USER=practice_user
+      - MYSQL_PASSWORD=9d9dfbfbfdfd@S
+      - MYSQL_ROOT_PASSWORD=9d9dfbfbfdfd@S
+    volumes:
+      - ./.containers/database:/var/lib/mysql
+    ports:
+      - 3306:3306
